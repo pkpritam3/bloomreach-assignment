@@ -23,3 +23,23 @@ cd web-client
 npm install
 npm start
 ```
+## Start File Watcher
+
+Run following commands to start File Watcher.
+
+```bash
+cd watcher
+npm install
+npm start
+```
+
+## Use CLI tool
+
+Run following commands.
+
+```bash
+cd cli-tool
+npm install
+npm i -g .
+commits
+```

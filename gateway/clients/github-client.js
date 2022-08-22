@@ -1,28 +1,29 @@
 const axios = require('axios');
 
 const baseURL = process.env.BASE_URL || 'https://api.github.com/';
-const authToken = process.env.AUTH_TOKEN || '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';
+const authToken = process.env.AUTH_TOKEN || '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';
 
-const client = axios.create({
-    baseURL,
-    timeout: 5000,
-    headers: { 'Authorization': `token ${authToken}` }
-});
+class GithubClient {
+    constructor(){
+        this.client = axios.create({
+            baseURL,
+            timeout: 5000,
+            headers: { 'Authorization': `token ${authToken}` }
+        });
+    }
+    getCommitsOfRepo(owner, repo, since, until, perPage) {
+        const per_page = perPage || 10;
+        return this.client.get(`repos/${owner}/${repo}/commits`, { params: { since, until, per_page } });
+    }
 
-const githubClient = {};
+    getCommitDetails(owner, repo, commitId) {
+        return this.client.get(`repos/${owner}/${repo}/commits/${commitId}`);
+    }
 
-githubClient.getCommitsOfRepo = (owner, repo, since, until, perPage) => {
-    const per_page = perPage || 10;
-    return client.get(`repos/${owner}/${repo}/commits`, { params: { since, until, per_page } });
+    searchCommits(q, perPage) {
+        const per_page = perPage || 10;
+        return this.client.get('search/commits', { params: { q, per_page } });
+    }
 }
 
-githubClient.getCommitDetails = (owner, repo, commitId) => {
-    return client.get(`repos/${owner}/${repo}/commits/${commitId}`);
-}
-
-githubClient.searchCommits = (q, perPage) => {
-    const per_page = perPage || 10;
-    return client.get('search/commits', { params: { q, per_page } });
-}
-
-module.exports = githubClient;
+module.exports = GithubClient;

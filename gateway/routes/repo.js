@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const githubClient = require('../clients/github-client');
+const GithubClient = require('../clients/github-client');
 const DeveloperService = require('../services/developer_service');
+
+const githubClient = new GithubClient();
 
 /* GET commits listing. */
 router.get('/:owner/:repo/commits', async function (req, res, next) {

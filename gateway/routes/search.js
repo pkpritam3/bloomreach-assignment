@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const githubClient = require('../clients/github-client');
+const GithubClient = require('../clients/github-client');
 
+const githubClient = new GithubClient();
 /* GET Search. */
 router.get('/commits', async function (req, res, next) {
     const { q, per_page } = req.query;

@@ -25,31 +25,11 @@ readline.question(`What's the searchTerm?`, searchTerm => {
       } catch (error) {
         console.error('Error', error);
       }
-      
+
     } else {
       console.log('No data found');
     }
   });
   readline.close();
 });
-
-
-
-// const args = process.argv.slice(2);
-
-
-// request(`${baseURL}/search/commits?q=${args[0]}&per_page=1`, { json: true }, async (err, res, body) => {
-//   if (err) { return console.log(err); }
-//   if (body.items.length > 0) {
-//     const buffer = Buffer.from(JSON.stringify(body.items));
-//     try {
-//       await fs.promises.writeFile(filePath, buffer);
-//       console.log('File is created successfully.');
-//     } catch (error) {
-//       console.error('Error', error);
-//     }
-//   } else {
-//     console.log('No data found');
-//   }
-// });
 
